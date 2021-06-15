@@ -31,12 +31,12 @@ export class UpdateComponent implements OnInit {
 
   update() {
     this.service.updateBus(this.addBus);
-    this.router.navigate(['list']).then(()=>location.reload());
+    this.router.navigate(['admin_bus-list']).then(()=>location.reload());
   } 
 
   //logout function
-  logout(){
+ /* logout(){
     this.router.navigate(['home']);
-  }
+  }*/
 
 }

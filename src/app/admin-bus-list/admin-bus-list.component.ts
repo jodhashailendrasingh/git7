@@ -38,8 +38,12 @@ export class AdminBusListComponent implements OnInit {
     
 
   //logout fn.
-  logout(){
-    this.router.navigate(['home']);
-  }
+  home(){
+    localStorage.removeItem("admin")
+    this.router.navigate(['home']).then(()=>{
+      location.reload();
+ });
 
+
+}
 }

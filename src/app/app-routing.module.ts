@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:'search',component:ByBusNoComponent},
   {path:'update',component:UpdateComponent},
   {path :'no-bus', component:NoBusesFoundComponent},
-  {path:'**',redirectTo:'',pathMatch:'full'},
+  {path:'**',redirectTo:'home',pathMatch:'full'},
  
 ];
 

@@ -5,6 +5,7 @@ import { BusAdmin } from 'src/BusAdmin.model';
 import { HttpClient } from '@angular/common/http';
 import { delay } from 'rxjs/operators';
 import { User } from 'src/user.model';
+import { Role } from 'src/role.modle';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,8 @@ export class AdminService {
   addUser(user:User)
   {
     this.http.post(this.baseUrl+"/add/2",user).subscribe();
+  }
+  async loginUser(email: string, password: string) {
+    return await this.http.get<Role>(this.baseUrl + "/login/" + email + "/" + password).toPromise();
   }
 }

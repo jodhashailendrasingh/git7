@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Role } from 'src/role.modle';
 import { User } from 'src/user.model';
+import { AdminService } from '../services/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -11,19 +13,27 @@ export class LoginComponent implements OnInit {
 
   user: User = new User();
   flag : boolean = false;
+  role:Role=new Role();
 
-  constructor(private router:Router) { }
-
-  ngOnInit(): void {}
+ 
+  constructor(private service:AdminService,private router:Router) { }
+  ngOnInit(){}
 
   validate() {
-    if(this.user.email=='admin@gmail.com'&&this.user.password=='admin123')
-      this.router.navigate(['admin-browse']);
-    else if(this.user.email=='fabroadies@gmail.com' && this.user.password == 'fabroadies')
-      this.flag = true;
-    else
-      alert("Invalid user id");
-    console.log(this.user.email+":"+this.user.password);
+
+  this.service.loginUser(this.user.email,this.user.password).then(data =>this.role = data);
+  localStorage.setItem("log","true");
+    if(this.role.roleId===1){
+     localStorage.setItem("admin","true");
+      this.router.navigate(['admin-browse']).then(()=>{
+        location.reload();
+   });
+    }
+    else if(this.role.roleId===2)
+       this.router.navigate(['home']).then(()=>{
+        location.reload();
+   });
+  
   }
 
 }
